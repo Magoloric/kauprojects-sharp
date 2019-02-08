@@ -1,0 +1,29 @@
+﻿<Window x:Class="KalkylLotto.LottoWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:KalkylLotto"
+        mc:Ignorable="d"        
+        Title="Lotteriet" Height="263.111" Width="320.666" Background="#FF526E42">
+    <Grid>
+        <Label Content="Ange ditt lottorad (Siffror mellan 1 och 35" HorizontalAlignment="Left" Margin="40,13,0,0" VerticalAlignment="Top" Foreground="White" Width="240"/>
+        <TextBox x:Name="UserLottoNum1" HorizontalAlignment="Left" Height="23" Margin="11,44,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="38" Background="#FF84DE88"/>
+        <TextBox x:Name="UserLottoNum2" HorizontalAlignment="Left" Height="23" Margin="54,44,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="37" RenderTransformOrigin="1.556,0.478" Background="#FF84DE88"/>
+        <TextBox x:Name="UserLottoNum3" HorizontalAlignment="Left" Height="23" Margin="96,44,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="37" Background="#FF84DE88"/>
+        <TextBox x:Name="UserLottoNum4" HorizontalAlignment="Left" Height="23" Margin="138,44,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="39" RenderTransformOrigin="1.426,0.594" Background="#FF84DE88"/>
+        <TextBox x:Name="UserLottoNum5" HorizontalAlignment="Left" Height="23" Margin="182,44,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="37" Background="#FF84DE88"/>
+        <TextBox x:Name="UserLottoNum6" HorizontalAlignment="Left" Height="23" Margin="224,44,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="38" Background="#FF84DE88"/>
+        <TextBox x:Name="UserLottoNum7" HorizontalAlignment="Left" Height="23" Margin="267,44,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="37" RenderTransformOrigin="2,0.623" Background="#FF84DE88"/>
+        <Label Content="Ange antal dragningar" HorizontalAlignment="Left" Margin="54,81,0,0" VerticalAlignment="Top" Foreground="White" Width="136"/>
+        <TextBox x:Name="NrOfDrawsField" HorizontalAlignment="Left" Height="23" Margin="195,84,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="67" Background="#FF84DE88"/>
+        <TextBlock x:Name="_5RightTextBlock" HorizontalAlignment="Left" Margin="20,194,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="79" Height="23" IsEnabled="False" Text="{Binding FiveRights, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}" Foreground="White" Background="#FF198239"/>
+        <Label Content="5 rätt" HorizontalAlignment="Left" Margin="20,163,0,0" VerticalAlignment="Top" Foreground="White"/>
+        <TextBlock x:Name="_6RightTextBlock" HorizontalAlignment="Left" Margin="118,194,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="79" Height="23" IsEnabled="False" Text="{Binding SixRights, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}" Foreground="White" Background="#FF198239"/>
+        <Label Content="6 rätt" HorizontalAlignment="Left" Margin="118,163,0,0" VerticalAlignment="Top" Foreground="White"/>
+        <TextBlock x:Name="_7RightTextBlock" HorizontalAlignment="Left" Margin="217,194,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="79" Height="23" IsEnabled="False" Text="{Binding SevenRights, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}" Foreground="White" Background="#FF198239"/>
+        <Label Content="7 rätt" HorizontalAlignment="Left" Margin="217,163,0,0" VerticalAlignment="Top" Foreground="White"/>
+        <Button x:Name="StartLottoButton" Content="Kör!" HorizontalAlignment="Left" Margin="118,123,0,0" VerticalAlignment="Top" Width="79" Height="35" Click="StartLottoButton_Click" Background="#FF65FF71" BorderBrush="#FF004D06" Foreground="Black"/>
+
+    </Grid>
+</Window>
