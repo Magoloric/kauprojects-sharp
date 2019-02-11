@@ -1,16 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
+﻿using System.Windows;
 
 namespace KalkylLotto
 {
@@ -19,11 +7,11 @@ namespace KalkylLotto
     /// </summary>
     public partial class LottoWindow : Window
     {
-        readonly LottoController Model = new LottoController();
+        readonly LottoController Model = new LottoController(); //Creates lotto controller
         public LottoWindow()
         {
             InitializeComponent();
-            this.DataContext = Model.lottery;
+            DataContext = Model.lottery; //Sets data context for dynamic result display
         }
 
         private void StartLottoButton_Click(object sender, RoutedEventArgs e)
@@ -35,15 +23,16 @@ namespace KalkylLotto
                                                         UserLottoNum4.Text,
                                                         UserLottoNum5.Text,
                                                         UserLottoNum6.Text,
-                                                        UserLottoNum7.Text});
-            if (code == 0)
+                                                        UserLottoNum7.Text}); //Gets the input and parses it
+            if (code == 0) //if all input is valid
             {
-                Model.InitiateLottery();
+                Model.InitiateLottery(); //Starts lottery
             }
             else
             {
-                string message = Model.formError(code);
-                string caption = "Felkod " + code;
+                string message = Model.FormError(code); //Creates the error message
+                string caption = "Felkod " + code; //Caption
+                //Shows the error
                 MessageBox.Show(message, caption, MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }

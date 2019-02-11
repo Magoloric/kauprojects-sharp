@@ -1,24 +1,20 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.ComponentModel;
 
 namespace KalkylLotto
 {
     class CalculatorController : INotifyPropertyChanged
+    //class implements the interface that notifies WPF element every time property changes. 
+    //Source: https://www.codeproject.com/Articles/36545/WPF-MVVM-Model-View-View-Model-Simplified
     {
-        protected Calculator calc = new Calculator();
-        private float result;
+        protected Calculator calc = new Calculator(); //Creates calculator
+        private float result; //stores the result
+        //For GUI interaction
         public event PropertyChangedEventHandler PropertyChanged;
 
         protected void Notify(string propertyName)
         {
-            if (this.PropertyChanged != null)
-            {
-                PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-            }
+            //Simplified if-expression (as suggested by Visual Studio)
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
         public float Result
@@ -26,19 +22,22 @@ namespace KalkylLotto
             get { return result; }
             set
             {
+                //If result changes, it gets sent to the "Result Field" in the GUI.
                 if (value != result)
                 { result = value; }
                 Notify("Result");
             }
         }
-        public int prepareCalc(string input1, string input2)
+        public int PrepareCalc(string input1, string input2)
         {
-
-            float inputFloat1, inputFloat2;
-            if (float.TryParse(input1, out inputFloat1))
-                {
+            //Parses the input for floats. 
+            //Source: https://docs.microsoft.com/en-us/dotnet/csharp/programming-guide/types/how-to-convert-a-string-to-a-number
+            //Check first input
+            if (float.TryParse(input1, out float inputFloat1))
+            {
                 calc.Input1 = inputFloat1;
-                if (float.TryParse(input2, out inputFloat2))
+                //Check second input
+                if (float.TryParse(input2, out float inputFloat2))
                 {
                     calc.Input2 = inputFloat2;
                     return 0;
@@ -52,50 +51,52 @@ namespace KalkylLotto
             {
                 return 1;
             }
+            //Depending on the returned number the error message is formed (or not, if it's zero)
         }
-        public int onAdd(string input1, string input2)
+        //Following four functions work similar way. 
+        public int OnAdd(string input1, string input2)
         {
-            
-            int code = prepareCalc(input1, input2);
-            if (code == 0)
+            //Parse inputs first
+            int code = PrepareCalc(input1, input2);
+            if (code == 0) //If parse is successfull
             {
-                Result = calc.addNumbers(calc.Input1, calc.Input2);
-                calc.Input1 = Result;
+                Result = calc.AddNumbers(calc.Input1, calc.Input2); //Do the math
+                calc.Input1 = Result; //Move result to the first input for further actions
             }
-            return code;
+            return code; //Return the code for error checker.
 
         }
-        public int onSubtract(string input1, string input2)
+        public int OnSubtract(string input1, string input2)
         {
-            int code = prepareCalc(input1, input2);
+            int code = PrepareCalc(input1, input2);
             if (code == 0)
             {
-                Result = calc.subtractNumbers(calc.Input1, calc.Input2);
+                Result = calc.SubtractNumbers(calc.Input1, calc.Input2);
                 calc.Input1 = Result;
             }
             return code;
         }
-        public int onMultiply(string input1, string input2)
+        public int OnMultiply(string input1, string input2)
         {
-            int code = prepareCalc(input1, input2);
+            int code = PrepareCalc(input1, input2);
             if (code == 0)
             {
-                Result = calc.multiplyNumbers(calc.Input1, calc.Input2);
+                Result = calc.MultiplyNumbers(calc.Input1, calc.Input2);
                 calc.Input1 = Result;
 
             }
             return code;
         }
-        public int onDivide(string input1, string input2)
+        public int OnDivide(string input1, string input2)
         {
-            int code = prepareCalc(input1, input2);
+            int code = PrepareCalc(input1, input2);
             if (code == 0)
             {
-                if (calc.Input2 != 0)
+                if (calc.Input2 != 0) //Prevents division with zero.
                 {
-                    Result = calc.divideNumbers(calc.Input1, calc.Input2);
+                    Result = calc.DivideNumbers(calc.Input1, calc.Input2);
                     calc.Input1 = Result;
-                   
+
                 }
                 else
                 {
@@ -104,47 +105,52 @@ namespace KalkylLotto
             }
             return code;
         }
-        public int onEquals (int lastButtonClicked, string input1, string input2)
+        //When Equals button pressed
+        public int OnEquals(int lastButtonClicked, string input1, string input2)
         {
             int code = 5;
-            switch(lastButtonClicked)
+            switch (lastButtonClicked) //Does the action depending on what button was clicked prior to this one.
             {
                 case 0:
                     break;
                 case 1:
-                    code = onAdd(input1, input2);
+                    code = OnAdd(input1, input2);
                     break;
                 case 2:
-                    code = onSubtract(input1, input2);
+                    code = OnSubtract(input1, input2);
                     break;
                 case 3:
-                    code = onMultiply(input1, input2);
+                    code = OnMultiply(input1, input2);
                     break;
                 case 4:
-                    code = onDivide(input1, input2);
-                    break;  
+                    code = OnDivide(input1, input2);
+                    break;
             }
             return code;
         }
-        public string formError(int errCode)
+        public string FormError(int errCode) // Creates error message
         {
             if (errCode == 1)
+            //Invalid input 1
             {
                 return "Inmattningsfält innehåller otillåtna symboler! Om du har skrivit in ett bråktal, se till att använda komma och inte punkt!";
             }
             if (errCode == 2)
             {
+                //invalid input 2
                 return "Inmattningsfält innehåller otillåtna symboler! Om du har skrivit in ett bråktal, se till att använda komma och inte punkt!";
             }
             if (errCode == 3)
             {
+                //Division with zero
                 return "Du får ej dela med noll!";
             }
             else return "";
         }
-        public void clearOutput()
+        //Brings calculator back to initial state.
+        public void ClearOutput()
         {
-            calc.clearData();
+            calc.ClearData();
             Result = 0;
         }
     }

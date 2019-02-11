@@ -1,33 +1,31 @@
-﻿using System;
-using System.Windows.Input;
-
-namespace KalkylLotto
+﻿namespace KalkylLotto
 {
     internal class LottoController
     {
+        //creates new lottery
         public Lotto lottery = new Lotto();
+        //Prepares the lottery
         public int PrepareLottery(string nrOfDraws, string[] userLottoNums)
         {
-            int nrOfDrawsInt;
-            int[] userLottoNumsInt = new int[7];
+            int[] userLottoNumsInt = new int[7]; //For numbers input by user
 
-            if (Int32.TryParse(nrOfDraws, out nrOfDrawsInt))
+            if (int.TryParse(nrOfDraws, out int nrOfDrawsInt)) //Tries to parse the input for ints.
             {
                 lottery.NrOfDraws = nrOfDrawsInt;
             }
-            else
+            else //If input is not int, return error code
             {
                 return 1;
             }
-            for (int i = 0; i < 7; i++)
+            for (int i = 0; i < 7; i++) //For parsing lottery row
             {
-                if (Int32.TryParse(userLottoNums[i], out userLottoNumsInt[i]))
+                if (int.TryParse(userLottoNums[i], out userLottoNumsInt[i])) //input validation
                 {
-                    if (userLottoNumsInt[i] < 1 || userLottoNumsInt[i] > 35)
+                    if (userLottoNumsInt[i] < 1 || userLottoNumsInt[i] > 35) //Range validation
                     {
                         return 3;
                     }
-                    for (int j = 0; j < i; j++)
+                    for (int j = 0; j < i; j++) //Duplicate checker
                     {
                         if (userLottoNumsInt[i] == userLottoNumsInt[j])
                             return 4;
@@ -38,14 +36,14 @@ namespace KalkylLotto
                     return 2;
                 }
             };
-            lottery.LottoRow = userLottoNumsInt;
+            lottery.LottoRow = userLottoNumsInt; //row is ready
             return 0;
         }
-        public void InitiateLottery()
+        public void InitiateLottery() //Starts the lottery
         {
-            lottery.generateRows(lottery.NrOfDraws, lottery.LottoRow);
+            lottery.GenerateRows(lottery.NrOfDraws, lottery.LottoRow); //Generates and compares
         }
-        public string formError(int errCode)
+        public string FormError(int errCode) //Creates error messages depending on error code
         {
             string errorMsg = null;
             if (errCode == 1)

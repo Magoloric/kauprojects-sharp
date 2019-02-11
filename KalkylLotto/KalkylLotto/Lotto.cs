@@ -1,28 +1,26 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace KalkylLotto
 {
-    class Lotto : INotifyPropertyChanged
+    class Lotto : INotifyPropertyChanged   //class implements the interface that notifies WPF element every time property changes. 
+    //Source: https://www.codeproject.com/Articles/36545/WPF-MVVM-Model-View-View-Model-Simplified 
     {
-        private int fiveRights, sixRights, sevenRights;
+        private int fiveRights, sixRights, sevenRights; //amount of rows with 5, 6 and 7 right numbers
 
+        //For GUI interaction
         public event PropertyChangedEventHandler PropertyChanged;
 
         protected void Notify(string propertyName)
         {
-            if (this.PropertyChanged != null)
-            {
-                PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-            }
+            //Simplified if-expression (as suggested by Visual Studio)
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
-        public int[] LottoRow { get; set; }
-        public int NrOfDraws { get; set; }
+        public int[] LottoRow { get; set; } //Lottery numbers holder
+        public int NrOfDraws { get; set; } //Number of rounds where new row is drawn
+
+        //If amount changes, it gets sent to the respective field in the GUI.
         public int FiveRights
         {
             get { return fiveRights; }
@@ -50,6 +48,7 @@ namespace KalkylLotto
                 Notify("SevenRights");
             }
         }
+        //constructor
         public Lotto()
         {
             LottoRow = new int[7];
@@ -58,44 +57,47 @@ namespace KalkylLotto
             sixRights = 0;
             sevenRights = 0;
         }
-        public void generateRows(int draws, int[] lottoRow)
+
+        //Lotto row generator
+        public void GenerateRows(int draws, int[] lottoRow)
         {
-            Random rand = new Random();
-            int[] generatedLottoRow = new int[7];
-            bool noDuplicates;
-            int generatedNumber;
-            for (int i = 0; i < draws; i++)
+            Random rand = new Random(); //Randomizer
+            int[] generatedLottoRow = new int[7]; //For generated numbers
+            bool noDuplicates; //Duplicate checker
+            int generatedNumber; //single generated number
+            for (int i = 0; i < draws; i++) //For each draw
             {
-                for (int j = 0; j < 7; j++)
+                for (int j = 0; j < 7; j++) //For number
                 {
                     do
                     {
-                        noDuplicates = true;
-                        generatedNumber = rand.Next(1, 36);
-                        for (int k = 0; k < j; k++)
+                        noDuplicates = true; //Let's say it's unique number
+                        generatedNumber = rand.Next(1, 36); //Generate it
+                        for (int k = 0; k < j; k++) //and compare with others in the current row
                         {
-                            if (generatedNumber == generatedLottoRow[k])
+                            if (generatedNumber == generatedLottoRow[k]) //if same number is caught in the row
                             {
-                                noDuplicates = false;
+                                noDuplicates = false; //then we need to generate a new number
                             }
                         }
-                    } while (noDuplicates == false);
-                    generatedLottoRow[j] = generatedNumber;
+                    } while (noDuplicates == false); //and try until number is unique
+                    generatedLottoRow[j] = generatedNumber; //Then put it into generated row
                 }
-                CompareLottoRows(lottoRow, generatedLottoRow);
-            }
+                CompareLottoRows(lottoRow, generatedLottoRow); //Finally, compare this row with the user's row
+            } //and keep going until all the rounds done
         }
         public void CompareLottoRows(int[] userLottoNums, int[] generatedLottoNums)
         {
             int rightNums = 0;
-            for (int i = 0; i < 7; i++)
+            for (int i = 0; i < 7; i++) //Goes through user row
             {
-                for (int j = 0; j < 7; j++)
+                for (int j = 0; j < 7; j++) //Goes through generated row
                 {
-                    if (userLottoNums[i] == generatedLottoNums[j])
-                        rightNums++;
+                    if (userLottoNums[i] == generatedLottoNums[j]) //If numbers are equal
+                        rightNums++; //Number of coincidents increased!
                 }
             }
+            //for showing off the results in GUI
             if (rightNums == 5)
             {
                 FiveRights++;
