@@ -1,0 +1,52 @@
+﻿<Window x:Class="Shopstock.StatisticsWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Shopstock"
+        mc:Ignorable="d"
+        Title="StatisticsWindow" Height="855" Width="694.667">
+    <Grid>
+        <ListView x:Name="TopBooksList" HorizontalAlignment="Left" DataContext="{Binding StatisticsWindow}" Height="378" Margin="10,33,0,0" VerticalAlignment="Top" Width="324">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Header="№" Width="50" DisplayMemberBinding="{Binding ItemNr}" />
+                    <GridViewColumn Header="Varunamn" Width="200" DisplayMemberBinding="{Binding ProductName}" />
+                    <GridViewColumn Header="Sålt" Width="70" DisplayMemberBinding="{Binding AmountSold}" />
+                </GridView>
+            </ListView.View>
+        </ListView>
+        <ListView x:Name="TopGamesList" HorizontalAlignment="Left" DataContext="{Binding StatisticsWindow}" Height="378" Margin="339,33,0,0" VerticalAlignment="Top" Width="325">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Header="№" Width="50" DisplayMemberBinding="{Binding ItemNr}" />
+                    <GridViewColumn Header="Varunamn" Width="200" DisplayMemberBinding="{Binding ProductName}" />
+                    <GridViewColumn Header="Sålt" Width="70" DisplayMemberBinding="{Binding AmountSold}" />
+                </GridView>
+            </ListView.View>
+        </ListView>
+        <ListView x:Name="TopMoviesList" HorizontalAlignment="Left" DataContext="{Binding StatisticsWindow}" Height="378" Margin="10,437,0,0" VerticalAlignment="Top" Width="324">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Header="№" Width="50" DisplayMemberBinding="{Binding ItemNr}" />
+                    <GridViewColumn Header="Varunamn" Width="200" DisplayMemberBinding="{Binding ProductName}" />
+                    <GridViewColumn Header="Sålt" Width="70" DisplayMemberBinding="{Binding AmountSold}" />
+                </GridView>
+            </ListView.View>
+        </ListView>
+        <ListView x:Name="TopMusicList" HorizontalAlignment="Left" DataContext="{Binding StatisticsWindow}" Height="378" Margin="339,437,0,0" VerticalAlignment="Top" Width="325">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Header="№" Width="50" DisplayMemberBinding="{Binding ItemNr}" />
+                    <GridViewColumn Header="Varunamn" Width="200" DisplayMemberBinding="{Binding ProductName}" />
+                    <GridViewColumn Header="Sålt" Width="70" DisplayMemberBinding="{Binding AmountSold}" />
+                </GridView>
+            </ListView.View>
+        </ListView>
+        <Label Content="Topp böcker" HorizontalAlignment="Left" Margin="142,6,0,0" VerticalAlignment="Top"/>
+        <Label Content="Top Spel" HorizontalAlignment="Left" Margin="459,7,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.639,0.6"/>
+        <Label Content="Topp Musik" HorizontalAlignment="Left" Margin="459,411,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.589,0.513"/>
+        <Label Content="Topp Filmer" HorizontalAlignment="Left" Margin="142,411,0,0" VerticalAlignment="Top"/>
+
+    </Grid>
+</Window>

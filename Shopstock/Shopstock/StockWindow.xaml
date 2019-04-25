@@ -1,0 +1,60 @@
+﻿<Window x:Class="Shopstock.StockWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Shopstock"
+        mc:Ignorable="d"
+        Title="Shopstock Stock View" Height="677.807" Width="854.665" ResizeMode="NoResize">
+    <Window.DataContext>
+        <local:StockModelView/>
+    </Window.DataContext>
+    <Grid Margin="0,0,0.667,1.667">
+        <Rectangle Fill="#FFF4F4F5" HorizontalAlignment="Left" Height="110" Margin="482,349,0,0" Stroke="Black" VerticalAlignment="Top" Width="75"/>
+
+        <Rectangle Fill="#FFF4F4F5" HorizontalAlignment="Left" Height="48" Margin="11,589,0,0" Stroke="Black" VerticalAlignment="Top" Width="466"/>
+        <Rectangle Fill="#FFF4F4F5" HorizontalAlignment="Left" Height="235" Margin="11,349,0,0" Stroke="Black" VerticalAlignment="Top" Width="466"/>
+
+        <TextBox x:Name="SearchBox" HorizontalAlignment="Left" Height="28" Margin="10,10,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="626"/>
+        <Button x:Name="SearchButton" Content="Sök" HorizontalAlignment="Left" Margin="636,10,0,0" VerticalAlignment="Top" Width="92" RenderTransformOrigin="0.96,0.517" Height="28" Click="SearchButton_Click"/>
+        <Label Content="Sök i:" HorizontalAlignment="Left" Margin="5,47,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.533,-0.833"/>
+        <CheckBox x:Name="NrCheckBox" Content="Nr" HorizontalAlignment="Left" Margin="46,53,0,0" VerticalAlignment="Top"/>
+        <CheckBox x:Name="TitleCheckBox" Content="Titel" HorizontalAlignment="Left" Margin="84,53,0,0" VerticalAlignment="Top" Checked="TitleCheckBox_Checked" Unchecked="TitleCheckBox_Unchecked"/>
+        <CheckBox x:Name="GenreCheckBox" Content="Genre" HorizontalAlignment="Left" Margin="132,53,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.559,2.011" Checked="TitleCheckBox_Unchecked"/>
+        <CheckBox x:Name="YearCheckBox" Content="År" HorizontalAlignment="Left" Margin="189,53,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.559,2.011" Checked="YearCheckBox_Checked" Unchecked="YearCheckBox_Unchecked"/>
+        <CheckBox x:Name="PublisherCheckBox" Content="Förlag" HorizontalAlignment="Left" Margin="225,53,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.559,2.011" Checked="PublisherCheckBox_Checked" Unchecked="PublisherCheckBox_Unchecked"/>
+        <CheckBox x:Name="CreatorCheckBox" Content="Skapare" HorizontalAlignment="Left" Margin="283,53,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.559,2.011" Checked="CreatorCheckBox_Checked" Unchecked="CreatorCheckBox_Unchecked"/>
+        <Label Content="Visa endast:" HorizontalAlignment="Left" Margin="408,46,0,0" VerticalAlignment="Top" RenderTransformOrigin="1.25,0.397"/>
+        <CheckBox x:Name="InStockCheckBox" Content="I lager" HorizontalAlignment="Left" Margin="500,53,0,0" VerticalAlignment="Top" Checked="InStockCheckBox_Checked" Unchecked="InStockCheckBox_Unchecked"/>
+        <CheckBox x:Name="GameCheckBox" Content="Spel" HorizontalAlignment="Left" Margin="558,53,0,0" VerticalAlignment="Top" Checked="GameCheckBox_Checked" Unchecked="GameCheckBox_Unchecked"/>
+        <CheckBox x:Name="BookCheckBox" Content="Böcker" HorizontalAlignment="Left" Margin="606,53,0,0" VerticalAlignment="Top" Checked="BookCheckBox_Checked" Unchecked="BookCheckBox_Unchecked"/>
+        <CheckBox x:Name="MusicCheckBox" Content="Musik/CD" HorizontalAlignment="Left" Margin="667,53,0,0" VerticalAlignment="Top" Checked="MusicCheckBox_Checked" Unchecked="MusicCheckBox_Unchecked"/>
+        <CheckBox x:Name="MovieCheckBox" Content="Filmer/DVD" HorizontalAlignment="Left" Margin="745,53,0,0" VerticalAlignment="Top" Checked="MovieCheckBox_Checked" Unchecked="MovieCheckBox_Unchecked"/>
+        <ListView x:Name="StockList"  DataContext="{Binding Sc}" HorizontalAlignment="Left" Height="266" Margin="10,78,0,0" VerticalAlignment="Top" Width="816" ItemsSource="{Binding WaresInStock.Container, Mode=TwoWay}" SelectionChanged="StockList_SelectionChanged" Background="White">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Header="№" Width="100" DisplayMemberBinding="{Binding ItemNr}" />
+                    <GridViewColumn Header="Varunamn" Width="450" DisplayMemberBinding="{Binding ProductName}" />
+                    <GridViewColumn Header="Pris/st" Width="80" DisplayMemberBinding="{Binding Price}" />
+                    <GridViewColumn Header="I lager" Width="60" DisplayMemberBinding="{Binding Amount}" />
+                    <GridViewColumn Header="Sålt" Width="50" DisplayMemberBinding="{Binding AmountSold}" />
+                    <GridViewColumn Header="Returnerat" Width="70" DisplayMemberBinding="{Binding ReturnedAmount}" />
+
+                </GridView>
+            </ListView.View>
+        </ListView>
+        <TextBlock x:Name="DescriptionBlock" Margin="11,349,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="235" OpacityMask="Black" Foreground="Black" HorizontalAlignment="Left" Width="466"/>
+        <TextBox x:Name="AmountIncreaseBox" Margin="488,378,0,0" TextWrapping="Wrap" FontSize="24" Height="33" VerticalAlignment="Top" HorizontalAlignment="Left" Width="63"/>
+        <Button x:Name="RestockButton" Content="Fyll på" Margin="488,421,0,0" VerticalAlignment="Top" Height="25" FontSize="16" RenderTransformOrigin="0.768,0.549" Click="RestockButton_Click" HorizontalAlignment="Left" Width="63"/>
+        <Button x:Name="StatisticsButton" Content="Statistik" Margin="484,590,0,0" VerticalAlignment="Top" Height="47" FontSize="16"  RenderTransformOrigin="0.067,0.329" Click="StatisticsButton_Click" HorizontalAlignment="Left" Width="73"/>
+        <Button x:Name="AddWareButton" Content="Lägg till" Margin="562,349,0,0" VerticalAlignment="Top" Height="56" FontSize="16"  Click="AddWareButton_Click" RenderTransformOrigin="0.566,-0.218" HorizontalAlignment="Left" Width="134"/>
+        <Button x:Name="DeleteWareButton" Content="Ta bort" Margin="701,349,0,0" VerticalAlignment="Top" Height="56" FontSize="16" RenderTransformOrigin="-1.593,-0.15" Click="DeleteWareButton_Click" HorizontalAlignment="Left" Width="124"/>
+        <Button x:Name="OpenFileButton" Content="Öppna fil" Margin="483,465,0,0" VerticalAlignment="Top" Height="56" FontSize="16"  RenderTransformOrigin="0.516,1.679" Click="OpenFileButton_Click" HorizontalAlignment="Left" Width="74"/>
+        <Button x:Name="SaveFileButton" Content="Spara fil" Margin="484,528,0,0" VerticalAlignment="Top" Height="56" FontSize="16"  RenderTransformOrigin="0.5,0.5" Click="SaveFileButton_Click" HorizontalAlignment="Left" Width="73"/>
+        <Button x:Name="CloseButton" Content="Stäng" Margin="701,590,0,0" VerticalAlignment="Top" Height="47" FontSize="16" RenderTransformOrigin="0.536,1.985" Click="CloseButton_Click" HorizontalAlignment="Left" Width="125"/>
+        <Label Content="Antal st" HorizontalAlignment="Left" Margin="494,352,0,0" VerticalAlignment="Top" Width="57"/>
+        <TextBlock x:Name="SaleStatBox" Margin="11,589,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="48" OpacityMask="Black" Foreground="Black" HorizontalAlignment="Left" Width="466"/>
+        <Button x:Name="ClearSearchButton" Content="Rensa sökning" HorizontalAlignment="Left" Margin="733,10,0,0" VerticalAlignment="Top" Width="92" RenderTransformOrigin="0.96,0.517" Height="28" Click="ClearSearchButton_Click"/>
+
+    </Grid>
+</Window>

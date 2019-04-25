@@ -1,0 +1,38 @@
+﻿<Window x:Name="TextEditWindow" x:Class="TextEditor.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:TextEditor"
+        mc:Ignorable="d"
+        Closing="TextEditWindow_Closing"
+        Title="{Binding CurrentTitle, UpdateSourceTrigger=PropertyChanged}" Height="508" Width="688" SizeToContent="WidthAndHeight">
+    <Grid Background="White">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="680*"/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <DockPanel HorizontalAlignment="Left" Height="20" LastChildFill="False" VerticalAlignment="Top" Width="793" Grid.ColumnSpan="2" Margin="0,0,-111.667,0">
+            <Menu>
+                <MenuItem Header="Fil" Background="White" BorderBrush="White" Width="54" OpacityMask="White" Foreground="#FF692D2D">
+                    <MenuItem x:Name="NewFileButton" Header="Ny Fil" Click="NewFileButton_Click" />
+                    <MenuItem x:Name="OpenFileButton" Header="Öppna Fil" Click="OpenFileButton_Click"  />
+                    <Separator />
+                    <MenuItem x:Name="SaveButton" Header="Spara Fil" Click="SaveButton_Click" />
+                    <MenuItem x:Name="SaveAsButton" Header="Spara Fil Som" Click="SaveAsButton_Click" />
+                    <Separator />
+                    <MenuItem x:Name="ExitButton" Header="Stäng programmet" Click="ExitButton_Click" />
+                </MenuItem>
+            </Menu>
+        </DockPanel>
+        <TextBox x:Name="TextEditorBox" HorizontalAlignment="Left" Height="382" Margin="10,25,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="664" TextChanged="TextEditorBox_TextChanged" BorderBrush="#FF0040FF" AcceptsReturn="True" AllowDrop="True" Drop="TextEditorBox_Drop" PreviewDragOver="TextEditorBox_PreviewDragOver"/>
+        <Label Content="Antal ord:" HorizontalAlignment="Left" Margin="10,428,0,0" VerticalAlignment="Top"/>
+        <Label Content="Antal rader:" HorizontalAlignment="Left" Margin="152,428,0,0" VerticalAlignment="Top" RenderTransformOrigin="-1.368,-1.083"/>
+        <Label Content="Antal bokstäver:" HorizontalAlignment="Left" Margin="317,428,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.559,0.449"/>
+        <Label Content="med mellanslag:" HorizontalAlignment="Left" Margin="496,428,0,0" VerticalAlignment="Top"/>
+        <TextBlock x:Name="nrOfWordsField" HorizontalAlignment="Left" Margin="77,433,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="21" Width="59" Text="{Binding NrOfWords, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}"/>
+        <TextBlock x:Name="nrOfRowsField" HorizontalAlignment="Left" Margin="228,433,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="21" Width="59" Text="{Binding NrOfLines, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}"/>
+        <TextBlock x:Name="nrOfLettersField" HorizontalAlignment="Left" Margin="423,433,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="21" Width="59" Text="{Binding NrOfLetters, UpdateSourceTrigger=PropertyChanged}"/>
+        <TextBlock x:Name="nrOfLettersSp" HorizontalAlignment="Left" Margin="592,433,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="21" Width="59" Text="{Binding NrOfSpaceAndLetter, UpdateSourceTrigger=PropertyChanged}"/>
+    </Grid>
+</Window>
