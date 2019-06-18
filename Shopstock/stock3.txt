@@ -1,0 +1,7 @@
+Music;5888;Killercats, Alex Skrindo - What I Said;10;5273;0;25;What I Said;Electronic;2015;NoCopyrightSound;Killercats, Alex Skrindo;3:54;1;
+Game;234235;Red Dead Redemption 2;599,99;1279;0;21;Red Dead Redemption 2;TPS;2018;Take-Two Interactive;Rockstar Games;Playstation4, Xbox One;
+Movie;498738;Detective Pikachu;599,99;3782;0;18;Detective Pikachu;Action, Äventyr, Komedi;2019;Warner Bros.;Legendary;1;
+Game;864655;Yoshi's Crafted World;699;92;0;5;Yoshi's Crafted World;Platform;2019;Nintendo;Good-Feel;Nintendo Switch;
+Movie;69872;Little House on the Prairie Alla Säsonger;799,99;443;0;1;Little House on the Prairie;Western, drama;1974;Universal;Universal;208;
+Book;779955;Omgiven av idioter av Thomas Erikson (Pocket);99;5851;0;7;Omgiven av idioter: hur man förstår dem som inte går att förstå;Psykologi;2018;Månpocket;Thomas Erikson;9789175038407;299
+Movie;4687654;Heybot! 50 Ep;699;294;0;6;Heybot!;Anime, Komedi;2015;Bandai Namco;BN Animation;50;
